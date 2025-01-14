@@ -16,7 +16,7 @@ const CarouselHero = () => {
             thumbWidth={100}
             autoPlay
              infiniteLoop
-              className="flex items-center gap-2 sm:h-[800px]  justify-center flex-col">
+              className="flex items-center gap-2 sm:h-[500px] lg:h-[700px]   justify-center flex-col">
                 <div>
                     <img src={b1} />
                 </div>
