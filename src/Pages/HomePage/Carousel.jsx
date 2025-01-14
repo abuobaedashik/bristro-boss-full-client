@@ -8,7 +8,7 @@ import b4 from '../../assets/home/04.jpg'
 import b5 from '../../assets/home/05.png'
 import b6 from '../../assets/home/06.png'
 
-const CarouselHero = () => {
+const      CarouselHero = () => {
     return (
         <div>
            <Carousel
