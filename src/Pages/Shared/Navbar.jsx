@@ -8,12 +8,22 @@ const Navbar = () => {
       <NavLink
         className={({ isActive }) =>
           isActive
-            ? "px-3 text-base text-[#FE9307] font-medium flex gap-1 items-center"
+            ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
             : " flex gap-1 items-center text-sm font-medium px-3"
         }
         to="/"
       >
         Home
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
+            : "flex gap-1 items-center text-sm font-medium px-3"
+        }
+        to="/menu"
+      >
+       Menu
       </NavLink>
 
       
@@ -22,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar max-w-[1920px] fixed z-10 bg-opacity-30 bg-black text-[#ffffff]">
+      <div className="navbar max-w-[1920px] py-3 fixed z-10 bg-opacity-30 bg-black text-[#ffffff]">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -48,7 +58,10 @@ const Navbar = () => {
               {link}
             </ul>
           </div>
-          <a className="btn btn-ghost  text-xl">Bristro Boss</a>
+          <div className="flex items-start mx-5 justify-between flex-col">
+          <a className="text-3xl font-bold  uppercase text-[#ffffff]">Bristro Boss</a> 
+          <a className="text-xl font-semibold   uppercase text-[#ffffff]">Restaurant</a>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

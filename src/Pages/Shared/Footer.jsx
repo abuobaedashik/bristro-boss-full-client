@@ -6,7 +6,7 @@ const Footer = () => {
     <div>
       <footer className="  ">
         <div className="  flex  justify-between">
-          <div className="bg-[#1f2937] w-[50%] p-10">
+          <div className="bg-[#1f2937] text-[#ffffff] w-[50%] p-10">
             <svg
               width="50"
               height="50"
@@ -24,7 +24,7 @@ const Footer = () => {
               Providing reliable tech since 1992
             </p>
           </div>
-          <div className="bg-[#111827] w-[50%]  p-10 space-y-4  ">
+          <div className="bg-[#111827] text-[#ffffff] w-[50%]  p-10 space-y-4  ">
             <h6 className="bg-[#111827] text-xl font-bold">Follow Us</h6>
             <h6 className="bg-[#111827]">Join Us On Social Media</h6>
             

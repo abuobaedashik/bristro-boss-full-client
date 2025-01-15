@@ -6,10 +6,15 @@ import Popular from "./Popular";
 import Recommand from "./Recommand";
 import Featured from "./Featured";
 import Testimonials from "./Testimonials";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div>
+      {/* helmet for dynamic title */}
+         <Helmet>
+              <title>Bristro Boss | Home</title>
+          </Helmet>
       {/* carousel section */}
       <div className="mb-12">
         <Carousel></Carousel>
@@ -19,7 +24,7 @@ const Home = () => {
         <Category></Category>
       </div>
       {/* bg image bristro boss */}
-      <div className="mb-16 w-10/12 mx-auto">
+      <div className="mb-16 w-full mx-auto">
         <Bgimage></Bgimage>
       </div>
       {/* popular menu */}
