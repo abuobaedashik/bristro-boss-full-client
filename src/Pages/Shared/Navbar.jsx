@@ -23,7 +23,17 @@ const Navbar = () => {
         }
         to="/menu"
       >
-       Menu
+      Our Menu
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
+            : "flex gap-1 items-center text-sm font-medium px-3"
+        }
+        to="/shop"
+      >
+      Our Shop
       </NavLink>
 
       
@@ -53,14 +63,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {link}
             </ul>
           </div>
           <div className="flex items-start mx-5 justify-between flex-col">
-          <a className="text-3xl font-bold  uppercase text-[#ffffff]">Bristro Boss</a> 
-          <a className="text-xl font-semibold   uppercase text-[#ffffff]">Restaurant</a>
+          <a className="md:text-3xl text-xl font-bold  uppercase text-[#ffffff]">Bristro Boss</a> 
+          <a className="text-xl hidden md:flex font-semibold   uppercase text-[#ffffff]">Restaurant</a>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">

@@ -16,7 +16,7 @@ const Recommand = () => {
     const [menu]=useMenu()
     console.log(menu)
     const Item =menu.filter(items => items.category === 'salad')
-    const OfferedItem =Item.slice(1,5)
+    const OfferedItem =Item.slice(1,4)
     return (
         <div>
              <div className="mt-4 mb-6">
@@ -26,7 +26,7 @@ const Recommand = () => {
             ></DynamicTitle>
            </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
                {
                 OfferedItem?.map(item => <CardMenu key={item._id} item={item}></CardMenu>)
                }
