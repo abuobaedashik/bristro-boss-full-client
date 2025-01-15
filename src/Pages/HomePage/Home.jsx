@@ -4,6 +4,7 @@ import Category from "./Category";
 import Bgimage from "./Bgimage";
 import Popular from "./Popular";
 import Recommand from "./Recommand";
+import Featured from "./Featured";
 
 const Home = () => {
   return (
@@ -33,6 +34,10 @@ const Home = () => {
       {/* recommends menu section */}
       <div className="mb-16 md:mt-36 w-10/12 mx-auto">
         <Recommand></Recommand>
+      </div>
+      {/*Feature section */}
+      <div className="mb-16 md:mt-36 w-full  mx-auto">
+        <Featured></Featured>
       </div>
     </div>
   );
