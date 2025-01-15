@@ -5,6 +5,7 @@ import Bgimage from "./Bgimage";
 import Popular from "./Popular";
 import Recommand from "./Recommand";
 import Featured from "./Featured";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   return (
@@ -38,6 +39,10 @@ const Home = () => {
       {/*Feature section */}
       <div className="mb-16 md:mt-36 w-full  mx-auto">
         <Featured></Featured>
+      </div>
+      {/*Feature section */}
+      <div className="mb-16 md:mt-36 w-10/12  mx-auto">
+        <Testimonials></Testimonials>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import DynamicTitle from '../Shared/DynamicTitle';
 import CardMenu from '../Shared/CardMenu';
 
 const Recommand = () => {
-    const [suggest,setsuggest]=useState('')
+    const [suggest,setsuggest]=useState([])
     useEffect(()=>{
         fetch('menu.json')
         .then(res=>res.json())
