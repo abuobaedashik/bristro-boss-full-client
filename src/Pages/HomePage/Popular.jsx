@@ -25,7 +25,7 @@ const Popular = () => {
 
            <div className="mt-2 grid grid-col-1 md:grid-cols-2 gap-12">
              {
-                menu.map(item =><MenuItemsTemplate item={item}></MenuItemsTemplate>)
+                menu?.map(item =><MenuItemsTemplate key={item._id} item={item}></MenuItemsTemplate>)
              }
            </div>
 
