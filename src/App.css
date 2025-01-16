@@ -1,0 +1,23 @@
+
+
+
+/* //    const [loader,setloader]=useState(true)
+
+//    const googleProvider = new GoogleAuthProvider()
+
+//    const CreateUser =(email,password)=>{
+//     setloader(true)
+//     return createUserWithEmailAndPassword(auth,email,password)
+//    }
+//    const LogInUser =(email,password)=>{
+//     setloader(true)
+//     return signInWithEmailAndPassword(auth,email,password) 
+//    }
+
+//    const googleSignIn =()=>{
+//       return signInWithPopup(auth,googleProvider)
+//    }
+//    const SignOut =()=>{
+//     setloader(true)
+//     return signOut(auth)
+//    } */
