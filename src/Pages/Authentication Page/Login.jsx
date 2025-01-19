@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import bglogin from '../../assets/others/authentication.png'
 import imgleft from '../../assets/others/authentication2.png'
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
 // import {
 //   loadCaptchaEnginge,
 //   LoadCanvasTemplate,
@@ -13,7 +15,10 @@ const Login = () => {
 //   useEffect(() => {
 //     loadCaptchaEnginge(6);
 //   }, []);
+  const {LogInUser,googleSignIn}=useContext(AuthContext)
+  const navigate = useNavigate();
   const handleLogin = (event) => {
+
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -21,6 +26,35 @@ const Login = () => {
     const captcha = form.capcha.value;
     const user = { email, password };
     console.log(user);
+
+
+    LogInUser(email,password)
+    .then(result=>{
+        const user =result.user
+        // console.log(user);
+         toast.success("User Login Successful", {
+                position: "top-center", 
+                autoClose: 3000, 
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "colored", 
+              });
+    })
+    .catch(error=>{
+        const Errormessage =error.message
+        // console.log(Errormessage);
+         toast.error(Errormessage , {
+                position: "top-center", 
+                autoClose: 3000, 
+                pauseOnHover: true,
+                draggable: true,
+                theme: "colored", 
+              })
+    })
+    
+
+    navigate(location?.state ? location?.state : "/");
 
     // if (!validateCaptcha(captcha)) {
     //   alert("Invalid captcha. Please try again.");
@@ -97,11 +131,12 @@ const Login = () => {
 
           <div className="text-sm ml-8  font-normal text-[#706F6F]">
           
-            {/* <Link to="/register" className="text-sm font-normal text-[#FF8C47]">
+                <p>If not a account  <Link to="/register" className="text-sm font-normal text-[#FF8C47]">
                 Register
-              </Link> */}
+              </Link>   First  </p>
           </div>
         </div>
+        <ToastContainer></ToastContainer>
       </div>
     </div>
   );

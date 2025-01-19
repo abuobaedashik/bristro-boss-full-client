@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
+  const { user, SignOut } = useContext(AuthContext);
+  const handleSignOut =()=>{
+    SignOut()
+     .then(()=>{
+      // console.log('Logout successful');
+      Swal.fire({
+        title: "Logout Successful",
+        icon: "success"
+      });
+     })
+     .catch(error=>{
+      //  console.log(error.message);
+      toast.error(error.message, {
+        position: "top-center", 
+        autoClose: 3000, 
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored", 
+      });
+     })
+  }
+
+
+
+
+
+
+
   const link = (
     <>
       <NavLink
@@ -42,9 +74,9 @@ const Navbar = () => {
             ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
             : "flex gap-1 items-center text-sm font-medium px-3"
         }
-        to="/login"
+        to="/private"
       >
-       Login
+       Secret
       </NavLink>
 
       
@@ -90,7 +122,40 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Go To </a>
+        <div className="flex items-center justify-between">
+       {user ? (
+        <div>
+          <button onClick={handleSignOut}>SignOut</button>
+        </div>
+      ) : (
+        <div className="">
+          <div className="flex items-center  gap-3 mr-5">
+            <NavLink
+               className={({ isActive }) =>
+                isActive
+                  ? "rounded-md px-3 py-1 text-[#ffffff] bg-[#FFA633] font-bold"
+                  : "md:flex gap-1 items-center hidden text-sm font-medium px-3"
+              }
+            to={"/register"}>
+              <button>Register</button>
+            </NavLink>
+            <NavLink
+             className={({ isActive }) =>
+              isActive
+                ? "rounded-md px-3 py-1 text-[#ffffff] bg-[#FFA633] font-bold"
+                : "flex gap-1 items-center text-sm font-medium px-3"
+            }
+             to={"/login"}>
+              <button >
+                Login
+              </button>
+            </NavLink>
+
+            {/* className="rounded-md px-3 py-1 text-[#ffffff] bg-[#FFA633] font-bold" */}
+          </div>
+        </div>
+      )}
+       </div>
         </div>
       </div>
     </>
