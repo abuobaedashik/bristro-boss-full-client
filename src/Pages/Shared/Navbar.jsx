@@ -51,6 +51,16 @@ const Navbar = () => {
         className={({ isActive }) =>
           isActive
             ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
+            : " flex gap-1 items-center text-sm font-medium px-3"
+        }
+        to="/contact"
+      >
+        Contact Us
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
             : "flex gap-1 items-center text-sm font-medium px-3"
         }
         to="/menu"

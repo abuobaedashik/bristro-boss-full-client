@@ -9,6 +9,8 @@ import Login from "../Pages/Authentication Page/Login";
 import Register from "../Pages/Authentication Page/Register";
 import Secrate from "../Pages/Shared/Secrate";
 import PrivateRoute from "./PrivateRoute";
+import Contact from "../Pages/Contact/Contact";
+
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ export const router = createBrowserRouter([
         {
          path:"/",
          element:<Home></Home>
+        },
+        {
+         path:"/contact",
+         element:<Contact></Contact>
         },
         {
          path:"/menu",
@@ -37,7 +43,7 @@ export const router = createBrowserRouter([
         },
         {
          path:"/private",
-         element:<PrivateRoute><Secrate></Secrate></PrivateRoute>
+         element:<PrivateRoute><></></PrivateRoute>
         },
       ]
     },
