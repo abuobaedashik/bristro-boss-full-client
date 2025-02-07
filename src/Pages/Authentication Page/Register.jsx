@@ -143,6 +143,8 @@ const Register = () => {
                     <img src={googlelogo} className="w-6 h-6" alt="" />
                     <p className="text-base">Sign In With Google</p>
                   </button> */}
+
+                  {/* from today i will comeback  Inshallah  */}
       
                 <div className="text-sm ml-8  font-normal text-[#706F6F]">
                 
