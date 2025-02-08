@@ -15,7 +15,7 @@ export const AuthContext = createContext(null)
    const [user,setuser]=useState(null)
  const [loader,setloader]=useState(true)
 
-  //  const googleProvider = new GoogleAuthProvider()
+   const googleProvider = new GoogleAuthProvider()
 
    const CreateUser =(email,password)=>{
     setloader(true)

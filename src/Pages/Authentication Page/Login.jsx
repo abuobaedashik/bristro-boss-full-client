@@ -4,6 +4,8 @@ import bglogin from '../../assets/others/authentication.png'
 import imgleft from '../../assets/others/authentication2.png'
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
+import { FaFacebookF, FaGithub } from "react-icons/fa";
+import { RiGoogleFill } from "react-icons/ri";
 // import {
 //   loadCaptchaEnginge,
 //   LoadCanvasTemplate,
@@ -61,6 +63,25 @@ const Login = () => {
     //   return;
     // }
   };
+  const handleGoogleSignIn =()=>{
+    googleSignIn()
+    .then(result=>{
+      console.log(result)
+      toast.error("Create User with Google Successful", {
+        position: "top-center", 
+        theme: "colored"
+      });
+      navigate(location?.state ? location?.state : "/");
+    })
+    .catch(error=>{
+      const errorMessage = error.message;
+       console.log(errorMessage);
+      toast.error(errorMessage, {
+        position: "top-center", 
+        theme: "colored"
+      })
+    })
+  }
   return (
     <div
     style={{backgroundImage:`url(${bglogin})`}}
@@ -128,13 +149,32 @@ const Login = () => {
               <img src={googlelogo} className="w-6 h-6" alt="" />
               <p className="text-base">Sign In With Google</p>
             </button> */}
-
-          <div className="text-sm ml-8  font-normal text-[#706F6F]">
+          <div className="text-sm ml-10 mx-auto  font-normal text-[#706F6F]">
+                      <p>
+                        If already you have an account{" "}
+                        <Link to="/register" className="text-base font-bold text-[#FF8C47]">
+                          Register
+                        </Link>{" "}
+                        Now{" "}
+                      </p>
+                    </div>
           
-                <p>If not a account  <Link to="/register" className="text-sm font-normal text-[#FF8C47]">
-                Register
-              </Link>   First  </p>
-          </div>
+                    <div className="mt-4">
+                      <p className="text-center text-base mt-2">Or Social Login</p>
+          
+                      <p className="flex gap-6 items-center justify-center mt-2">
+                        <button className="shadow-md hover:shadow-xl  border-2 border-[#444444] justify-center py-2 mb-3 w-10 h-10 items-center  flex  gap-3  text-lg rounded-full ">
+                          <FaFacebookF />
+                        </button>
+                        <button onClick={handleGoogleSignIn} className="shadow-md hover:shadow-xl  border-2 border-[#444444] justify-center py-2 mb-3 w-10 h-10 items-center  flex  gap-3  text-lg rounded-full ">
+                          <RiGoogleFill />
+                        </button>
+                        <button className="shadow-md hover:shadow-xl justify-center py-2 mb-3 w-10 h-10 items-center  flex gap-3  text-lg rounded-full border-2 border-[#444444] ">
+                          <FaGithub />
+                        </button>
+                      </p>
+                    </div>
+         
         </div>
         <ToastContainer></ToastContainer>
       </div>
