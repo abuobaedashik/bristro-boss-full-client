@@ -135,10 +135,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
        {user ? (
         <div>
+          <span className="mr-6">{user?.displayName}</span>
           <button onClick={handleSignOut}>SignOut</button>
         </div>
       ) : (
-        <div className="">
+        <div >
           <div className="flex items-center  gap-3 mr-5">
             <NavLink
                className={({ isActive }) =>

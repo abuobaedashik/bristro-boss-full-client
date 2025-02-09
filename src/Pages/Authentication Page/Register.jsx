@@ -11,16 +11,17 @@ import { RiGoogleFill } from "react-icons/ri";
 
 const Register = () => {
   const [err, seterr] = useState("");
-  const { CreateUser, googleSignIn } = useContext(AuthContext);
+  const { CreateUser, googleSignIn,UpdateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    const user = { name, email, password };
+    const user = { name, email, password , photo};
     console.log(user);
 
     const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -46,6 +47,12 @@ const Register = () => {
           draggable: true,
           theme: "colored",
         });
+        UpdateUser(user.name,user.photoURL)
+        .then(
+             console.log('user profile updated ')
+        )
+        .catch()
+
       })
       .catch((error) => {
         const Errormessage = error.message;
@@ -107,6 +114,18 @@ const Register = () => {
                 type="text"
                 placeholder="name"
                 name="name"
+                className="input input-bordered pr-6 pl-2"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo</span>
+              </label>
+              <input
+                type="text"
+                placeholder="photourl"
+                name="photo"
                 className="input input-bordered pr-6 pl-2"
                 required
               />
