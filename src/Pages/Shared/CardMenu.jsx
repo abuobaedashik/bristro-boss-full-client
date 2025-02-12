@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CardMenu = ({ item }) => {
   const { name, recipe, image,_id,
@@ -9,7 +10,7 @@ const CardMenu = ({ item }) => {
   const { user } = useContext(AuthContext);
   const navigate =useNavigate()
   const location =useLocation()
-  const handleaddtocard = (carditem) => {
+  const handleaddtocard = (cardItem) => {
     if (user && user.email) {
       //  todo add to card
       console.log('user found')
@@ -20,6 +21,13 @@ const CardMenu = ({ item }) => {
         image,
         price
       }
+      axios.post('http://localhost:5000/carts',cardItem)
+      .then(res=>{
+        console.log(res.data)
+      })
+      .catch(Error=>{
+        console.log(Error)
+      })
     } 
     else {
       Swal.fire({
