@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { FaCartShopping } from "react-icons/fa6";
+import { PiShoppingCartDuotone } from "react-icons/pi";
+import { GiShoppingCart } from "react-icons/gi";
+import profile from '../../assets/others/profile.png'
 
 
 const Navbar = () => {
@@ -84,9 +88,22 @@ const Navbar = () => {
             ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
             : "flex gap-1 items-center text-sm font-medium px-3"
         }
+        to="/dashboard"
+      >
+       Dashboard
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive
+            ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
+            : "flex gap-1 items-center text-sm font-medium px-3"
+        }
         to="/private"
       >
-       Secret
+       <div className="relative px-6 py-3 ">
+        <p className="text-2xl p-2 rounded-full border border-[#fb941e]"><GiShoppingCart /></p>
+         <div className="badge absolute top-2 right-2  badge-secondary  py-1 px-1 ">100</div>
+       </div>
       </NavLink>
 
       
@@ -134,9 +151,10 @@ const Navbar = () => {
         <div className="navbar-end">
         <div className="flex items-center justify-between">
        {user ? (
-        <div>
-          <span className="mr-6">{user?.displayName}</span>
+        <div className=" flex items-center justify-center gap-2">
+          {/* <span className="mr-6">{user?.displayName}</span> */}
           <button onClick={handleSignOut}>SignOut</button>
+          <span className="mr-6"> <img src={profile} alt="profile" className="rounded-full w-7 h-7" /> </span>
         </div>
       ) : (
         <div >
