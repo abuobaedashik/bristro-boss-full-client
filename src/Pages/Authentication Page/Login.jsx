@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bglogin from '../../assets/others/authentication.png'
 import imgleft from '../../assets/others/authentication2.png'
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -19,6 +19,9 @@ const Login = () => {
 //   }, []);
   const {LogInUser,googleSignIn}=useContext(AuthContext)
   const navigate = useNavigate();
+  const location =useLocation();
+  const from = location.state?.from?.pathname || "/";
+  console.log("location is now", location.state)
   const handleLogin = (event) => {
 
     event.preventDefault();
@@ -42,6 +45,7 @@ const Login = () => {
                 draggable: true,
                 theme: "colored", 
               });
+              navigate(from, { replace: true });
     })
     .catch(error=>{
         const Errormessage =error.message
@@ -56,7 +60,7 @@ const Login = () => {
     })
     
 
-    navigate(location?.state ? location?.state : "/");
+    
 
     // if (!validateCaptcha(captcha)) {
     //   alert("Invalid captcha. Please try again.");
@@ -71,7 +75,7 @@ const Login = () => {
         position: "top-center", 
         theme: "colored"
       });
-      navigate(location?.state ? location?.state : "/");
+      navigate(from, { replace: true });
     })
     .catch(error=>{
       const errorMessage = error.message;
