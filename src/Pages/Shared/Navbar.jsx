@@ -100,7 +100,7 @@ const Navbar = () => {
             ? "px-3 text-base text-[#EEFF25] font-medium flex gap-1 items-center"
             : "flex gap-1 items-center text-sm font-medium px-3"
         }
-        to="/private"
+        to="/dashboard/cart"
       >
        <div className="relative px-6 py-3 ">
         <p className="text-2xl p-2 rounded-full border border-[#fb941e]"><GiShoppingCart /></p>

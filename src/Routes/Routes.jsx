@@ -11,6 +11,7 @@ import Secrate from "../Pages/Shared/Secrate";
 import PrivateRoute from "./PrivateRoute";
 import Contact from "../Pages/Contact/Contact";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import Cart from "../Pages/Dashboard/Dashboard Pages/Cart";
 
 
 export const router = createBrowserRouter([
@@ -45,10 +46,36 @@ export const router = createBrowserRouter([
         {
          path:"/private",
          element:<PrivateRoute><></></PrivateRoute>
+        }
+      ]
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard></Dashboard>,
+      children:[
+        {
+         path:"cart",
+         element:<Cart></Cart>
         },
         {
-         path:"/dashboard",
-         element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+         path:"home",
+         element:<p>home</p>
+        },
+        {
+         path:"reservation",
+         element:<p>reservation</p>
+        },
+        {
+         path:"payment",
+         element:<p>Payment</p>
+        },
+        {
+         path:"addreview",
+         element:<p>add review</p>
+        },
+        {
+         path:"booking",
+         element:<p>my booking</p>
         },
       ]
     },
