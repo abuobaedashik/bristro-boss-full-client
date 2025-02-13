@@ -7,10 +7,12 @@ import { FaCartShopping } from "react-icons/fa6";
 import { PiShoppingCartDuotone } from "react-icons/pi";
 import { GiShoppingCart } from "react-icons/gi";
 import profile from '../../assets/others/profile.png'
+import useCart from "../../Hooks/useCart";
 
 
 const Navbar = () => {
   const { user, SignOut } = useContext(AuthContext);
+  const [cart] =useCart();
   const handleSignOut =()=>{
     SignOut()
      .then(()=>{
@@ -102,7 +104,7 @@ const Navbar = () => {
       >
        <div className="relative px-6 py-3 ">
         <p className="text-2xl p-2 rounded-full border border-[#fb941e]"><GiShoppingCart /></p>
-         <div className="badge absolute top-2 right-2  badge-secondary  py-1 px-1 ">100</div>
+         <div className="badge absolute top-2 right-2  badge-secondary  py-1 px-1 ">+{cart.length}</div>
        </div>
       </NavLink>
 

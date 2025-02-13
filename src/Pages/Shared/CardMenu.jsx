@@ -3,16 +3,19 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
+
 
 
 const CardMenu = ({ item }) => {
+  const [,refetch] =useCart()
   const { name, recipe, image,_id,
     price } = item;
   const { user } = useContext(AuthContext);
   const navigate =useNavigate()
   const location =useLocation()
   const axiosSecure =useAxiosSecure()
-  const handleaddtocard = (cardItem) => {
+  const handleaddtocard = () => {
     if (user && user.email) {
       //  todo add to card
       console.log('user found')
@@ -35,6 +38,8 @@ const CardMenu = ({ item }) => {
             timer: 1500
           });
         }
+        // refetch cart items
+        refetch()
       })
       .catch(error=>{
         console.log(error)
