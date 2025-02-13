@@ -6,6 +6,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
 import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { RiGoogleFill } from "react-icons/ri";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 // import {
 //   loadCaptchaEnginge,
 //   LoadCanvasTemplate,
@@ -18,6 +20,7 @@ const Login = () => {
 //     loadCaptchaEnginge(6);
 //   }, []);
   const {LogInUser,googleSignIn}=useContext(AuthContext)
+  const axiosPublic =useAxiosPublic()
   const navigate = useNavigate();
   const location =useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -75,6 +78,27 @@ const Login = () => {
         position: "top-center", 
         theme: "colored"
       });
+      const userInfo ={
+              name:result?.user?.displayName,
+              email:result?.user?.email,
+              photo:result?.user?.photoURL
+              
+            }
+      
+            axiosPublic.post('/user',userInfo)
+            .then(
+              res=>{
+                console.log(res.data)
+                if (res.data.insertedId) {
+                  console.log(res.data)
+                  Swal.fire({
+                    title: "Google Login successfull ",
+                    icon: "success",
+                    draggable: true
+                  });
+                }
+              })
+      
       navigate(from, { replace: true });
     })
     .catch(error=>{

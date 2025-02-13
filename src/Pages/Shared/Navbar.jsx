@@ -51,7 +51,7 @@ const Navbar = () => {
         }
         to="/"
       >
-        Home
+        Home 
       </NavLink>
       <NavLink
         className={({ isActive }) =>

@@ -26,10 +26,13 @@ export const AuthContext = createContext(null)
     return signInWithEmailAndPassword(auth,email,password) 
    }
    const UpdateUser =(name,photo)=>{
-     return updateProfile(auth.currentUser,{
-      displayName:name, photoURL:photo
-     })
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
    }
+
+  
 
 
    const googleSignIn =()=>{

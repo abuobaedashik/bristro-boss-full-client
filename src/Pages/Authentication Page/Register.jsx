@@ -8,9 +8,12 @@ import { toast, ToastContainer } from "react-toastify";
 import googlelogo from "../../assets/others/googleicon.png";
 import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { RiGoogleFill } from "react-icons/ri";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [err, seterr] = useState("");
+  const axiosPublic =useAxiosPublic()
   const { CreateUser, googleSignIn,UpdateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -47,11 +50,40 @@ const Register = () => {
           draggable: true,
           theme: "colored",
         });
-        UpdateUser(user.name,user.photoURL)
-        .then(
-             console.log('user profile updated ')
-        )
-        .catch()
+        
+        UpdateUser(name, photo)
+      .then(() => {
+          const userInfo ={
+            name,email,photo
+          }
+          console.log(userInfo)
+         axiosPublic.post('/user',userInfo)
+         .then(
+          res=>{
+            console.log(res.data)
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "User Create successfull",
+                icon: "success",
+                draggable: true
+              });
+            }
+          })
+
+        console.log("User profile updated");
+        toast.success("Profile Updated Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+      })
+
+      .catch((error) => {
+        console.error("Profile update error:", error);
+        toast.error(error.message, {
+          position: "top-center",
+        });
+
+      })
 
       })
       .catch((error) => {
@@ -80,6 +112,26 @@ const Register = () => {
         position: "top-center", 
         theme: "colored"
       });
+      const userInfo ={
+        name:result?.user?.displayName,
+        email:result?.user?.email,
+        photo:result?.user?.photoURL
+        
+      }
+
+      axiosPublic.post('/user',userInfo)
+      .then(
+        res=>{
+          console.log(res.data)
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Google Login successfull ",
+              icon: "success",
+              draggable: true
+            });
+          }
+        })
+
       navigate(location?.state ? location?.state : "/");
     })
     .catch(error=>{
