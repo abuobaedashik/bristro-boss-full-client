@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
 
 const CardMenu = ({ item }) => {
   const { name, recipe, image,_id,
@@ -10,6 +11,7 @@ const CardMenu = ({ item }) => {
   const { user } = useContext(AuthContext);
   const navigate =useNavigate()
   const location =useLocation()
+  const axiosSecure =useAxiosSecure()
   const handleaddtocard = (cardItem) => {
     if (user && user.email) {
       //  todo add to card
@@ -21,12 +23,21 @@ const CardMenu = ({ item }) => {
         image,
         price
       }
-      axios.post('http://localhost:5000/carts',cardItem)
+      axiosSecure.post('/carts',cardItem)
       .then(res=>{
         console.log(res.data)
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${name} added to your card`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       })
-      .catch(Error=>{
-        console.log(Error)
+      .catch(error=>{
+        console.log(error)
       })
     } 
     else {
