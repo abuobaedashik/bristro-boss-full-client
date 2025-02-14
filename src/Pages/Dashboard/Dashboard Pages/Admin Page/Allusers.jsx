@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
 
 const Allusers = () => {
   const AxiosSecure = useAxiosSecure();
-  const { data: users = [],refetch } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await AxiosSecure.get("/user");
@@ -45,6 +47,38 @@ const Allusers = () => {
     });
   };
 
+  const handleMakeAdmin = (user) => {
+    Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Add Admin",
+        denyButtonText: `Don't Add to Admin`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            AxiosSecure.patch(`/user/admin/${user._id}`).then((res) => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                  refetch();
+                  toast.success(`${user.name} is admin now`, {
+                      position: "top-center",
+                      autoClose: 2000, // 3 seconds
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      theme: "colored",
+                    });
+                 
+                }
+              });
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+  };
+
   //   console.log(users)
 
   return (
@@ -75,7 +109,24 @@ const Allusers = () => {
                   <td>{user?.name}</td>
                   <td>{user?.email}</td>
 
-                  <td>{/* {user} */}</td>
+                  <td>
+                    {user.role === "admin" ? (
+                       <>
+                         <p className="text-xs font-semibold text-[#FF0000]">Admin</p>
+                     </>
+                    ) : (
+                      <>
+                        <p>
+                          <button
+                            onClick={() => handleMakeAdmin(user)}
+                            className="btn hover:text-[#131313] btn-ghost btn-xs bg-red-600 px-2 py-1 text-[#ffffff]"
+                          >
+                            <FaUsers></FaUsers>
+                          </button>
+                        </p>
+                      </>
+                    )}
+                  </td>
 
                   <td>
                     <p className="">
@@ -91,6 +142,8 @@ const Allusers = () => {
               ))}
             </tbody>
           </table>
+
+          <ToastContainer />
         </div>
       </div>
     </div>
