@@ -259,7 +259,7 @@ const Register = () => {
             </p>
           </div>
 
-          {/* from today i will comeback  Inshallah  */}
+        
         </div>
         <ToastContainer></ToastContainer>
       </div>

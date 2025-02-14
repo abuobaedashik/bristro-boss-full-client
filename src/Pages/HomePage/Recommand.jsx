@@ -14,7 +14,7 @@ const Recommand = () => {
     // })
 
     const [menu]=useMenu()
-    console.log(menu)
+    // console.log(menu)
     const Item =menu.filter(items => items.category === 'salad')
     const OfferedItem =Item.slice(1,4)
     return (

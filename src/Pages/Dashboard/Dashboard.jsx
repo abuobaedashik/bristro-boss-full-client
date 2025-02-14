@@ -13,6 +13,7 @@ import { RiContactsBook3Fill } from "react-icons/ri";
 import useCart from "../../Hooks/useCart";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
@@ -30,7 +31,8 @@ const Dashboard = () => {
    console.log(users)
  
   // todo isAdmin to the database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  // const isAdmin = true ;
   return (
     <div className="flex  ">
       <div className=" space-y-2 w-[20%]  min-h-screen text-[#131313] text-base bg-orange-400 pt-6 pl-3">
