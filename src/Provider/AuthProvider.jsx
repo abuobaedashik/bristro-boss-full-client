@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext } from 'react';
 import app from '../Firebase/Firebase.config';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 
 
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null)
+const axiosPublic =useAxiosPublic()
 // eslint-disable-next-line react/prop-types
  const AuthProvider = ({children}) => {
    const [user,setuser]=useState(null)
@@ -56,6 +58,20 @@ export const AuthContext = createContext(null)
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
           setuser(currentUser);  
           console.log("state capture",currentUser);
+          if (currentUser) {
+            // get token 
+              const userInfo = {email :currentUser.email}
+              axiosPublic.post('/user',userInfo)
+              .then(res=>{
+                if (res.data.token) {
+                  localStorage.setItem('access-token',res.data.token)
+                }
+              })
+          }
+          else{
+            // removed token
+            localStorage.removeItem('access-token')
+          }
           setloader(false);      
         });
       
