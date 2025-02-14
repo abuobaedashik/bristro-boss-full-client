@@ -124,6 +124,7 @@ const Register = () => {
         res=>{
           console.log(res.data)
           if (res.data.insertedId) {
+            console.log(res.data)
             Swal.fire({
               title: "Google Login successfull ",
               icon: "success",
