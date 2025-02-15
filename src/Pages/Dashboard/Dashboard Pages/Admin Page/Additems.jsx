@@ -1,10 +1,53 @@
 import { useForm } from "react-hook-form";
 import DynamicTitle from "../../../Shared/DynamicTitle";
 import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;      
+
 
 const Additems = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit ,reset} = useForm();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  
+  const onSubmit = async(data) => {
+    console.log(data)
+    const formData = new FormData();
+    formData.append("image", data.image[0]); 
+     const res = await axiosPublic.post(image_hosting_api,formData, {
+         headers: {
+            "Content-Type": "multipart/form-data",
+         },
+     });
+     if(res.data.success){
+          const menuItem ={
+            name:data.name,
+            category:data.category,
+            price:parseFloat(data.price),
+            recipe:data.recipe,
+            image:res.data.data.url,
+          }
+         const menuRes= await axiosSecure.post('/menu',menuItem)
+         console.log(menuRes.data);
+         if(menuRes.data.insertedId){
+             console.log('Item Added Successfully')
+             reset();
+            // sweet alert
+            Swal.fire(
+                'Good job!',
+                'Item Added Successfully',
+                'success'
+            )  
+            }
+     }
+     console.log( 'data url',res.data)
+};
 
   return (
     <div>
@@ -38,16 +81,17 @@ const Additems = () => {
                 <span className="label-text">Recepe Name *</span>
               </div>
               <select
+              defaultValue={"default"}
                 {...register("category", { required: true })}
                 className="select select-warning w-full "
               >
                 <option disabled selected>
                   Pick a Category
                 </option>
-                <option>Salad</option>
+                <option>salad</option>
                 <option>pizza</option>
-                <option>soups</option>
-                <option>desserts</option>
+                <option>soup</option>
+                <option>dessert</option>
                 <option>drinks</option>
               </select>
             </label>
@@ -82,6 +126,7 @@ const Additems = () => {
           <label className="form-control w-full  mb-4 ">
             <input
               type="file"
+              {...register("image", { required: true })}
               className="file-input file-input-bordered file-input-accent w-full max-w-xs"
             />
           </label>
