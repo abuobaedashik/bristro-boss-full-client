@@ -17,21 +17,24 @@ import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
-  const AxiousSecure =useAxiosSecure()
-    
+  const [isAdmin] = useAdmin();
+ 
+  
+  
 
-  const { data: users = [],refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await AxiousSecure.get("/user");
-      return res.data;
-    },
-  });
+  // const { data: users = [],refetch } = useQuery({
+  //   queryKey: ["users"],
+  //   enabled: isAdmin,
+  //   queryFn: async () => {
+  //     const res = await AxiousSecure.get("/user");
+  //     return res.data;
+  //   },
+  // });
 
-   console.log(users)
+  //  console.log(users)
+
  
   // todo isAdmin to the database
-  const [isAdmin] = useAdmin();
   // const isAdmin = true ;
   return (
     <div className="flex  ">
@@ -112,10 +115,10 @@ const Dashboard = () => {
                     : "flex gap-1 items-center text-sm font-medium px-3"
                 }
                 to={"allusers"}
-                onClick={() => refetch()}
+          
               >
                 <FaUsers></FaUsers>
-                All users ({users?.length})
+                All users 
               </NavLink>
             </p>
           </>
