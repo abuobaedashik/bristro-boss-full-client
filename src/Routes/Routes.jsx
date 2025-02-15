@@ -17,6 +17,7 @@ import ManageBookings from "../Pages/Dashboard/Dashboard Pages/Admin Page/Manage
 import ManageItems from "../Pages/Dashboard/Dashboard Pages/Admin Page/ManageItems";
 import Additems from "../Pages/Dashboard/Dashboard Pages/Admin Page/Additems";
 import AdminHome from "../Pages/Dashboard/Dashboard Pages/Admin Page/AdminHome";
+import AdminRoutes from "./AdminRoutes";
 
 
 export const router = createBrowserRouter([
@@ -87,23 +88,23 @@ export const router = createBrowserRouter([
         // admin routes
         {
          path:"allusers",
-         element:<Allusers></Allusers>
+         element:<AdminRoutes><Allusers></Allusers></AdminRoutes>
         },
         {
          path:"manageBookings",
-         element:<ManageBookings></ManageBookings>
+         element:<AdminRoutes><ManageBookings></ManageBookings></AdminRoutes>
         },
         {
          path:"manageItems",
-         element:<ManageItems></ManageItems>
+         element:<AdminRoutes><ManageItems></ManageItems></AdminRoutes>
         },
         {
          path:"addItems",
-         element:<Additems></Additems>
+         element:<AdminRoutes><Additems></Additems></AdminRoutes>
         },
         {
          path:"adminhome",
-         element:<AdminHome></AdminHome>
+         element:<AdminRoutes><AdminHome></AdminHome></AdminRoutes>
         },
       ]
     },
