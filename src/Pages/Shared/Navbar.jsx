@@ -34,7 +34,10 @@ const Navbar = () => {
       });
      })
   }
+ 
+ 
 
+ 
 
 
 
@@ -156,7 +159,9 @@ const Navbar = () => {
         <div className=" flex items-center justify-center gap-2">
           {/* <span className="mr-6">{user?.displayName}</span> */}
           <button onClick={handleSignOut}>SignOut</button>
-          <span className="mr-6"> <img src={profile} alt="profile" className="rounded-full w-7 h-7" /> </span>
+          <span className="mr-6"> {
+             user? <><img src={user?.photoURL} alt="profile" className="w-10 h-10 rounded-full" /> </> : <img src={profile} alt="profile" className="w-10 h-10 rounded-full" />
+            } </span>
         </div>
       ) : (
         <div >

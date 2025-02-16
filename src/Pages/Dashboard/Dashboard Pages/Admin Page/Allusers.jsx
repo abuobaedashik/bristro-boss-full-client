@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
+import DynamicTitle from "../../../Shared/DynamicTitle";
 
 const Allusers = () => {
   const AxiosSecure = useAxiosSecure();
@@ -82,14 +83,20 @@ const Allusers = () => {
   //   console.log(users)
 
   return (
-    <div className="mt-8 px-20 py-12 bg-[#ffffff]">
+    <div className="mt-8 px-20 mx-8 py-6 bg-[#ffffff]">
+       <div className="md:mt-6 mt-4">
+        <DynamicTitle
+          subheading="---How many??---"
+          heading="MANAGE USERS"
+        ></DynamicTitle>
+      </div>
       <div className="flex  gap-6   justify-between">
         <p className="mt-4 text-xl font-bold">Total User :{users.length}</p>
       </div>
 
       <div className="table mt-6">
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table table-pin-rows table-pin-cols">
             {/* head */}
             <thead className="bg-orange-600 rounded-xl text-[#ffffff] text-base font-semibold">
               <tr>

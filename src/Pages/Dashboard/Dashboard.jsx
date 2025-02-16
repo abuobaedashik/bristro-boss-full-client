@@ -37,7 +37,7 @@ const Dashboard = () => {
   // todo isAdmin to the database
   // const isAdmin = true ;
   return (
-    <div className="flex  ">
+    <div className="flex  gap-0">
       <div className=" space-y-2 w-[20%]  min-h-screen text-[#131313] text-base bg-orange-400 pt-6 pl-3">
         <p className="py-3">
           <p className="text-xl px-3 font-semibold   text-[#151515]">
