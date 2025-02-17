@@ -3,14 +3,16 @@ import DynamicTitle from "../../../Shared/DynamicTitle";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useMenu from "../../../../Hooks/useMenu";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
 
 const ManageItems = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  const [menu, loadar,refetch] = useMenu();
+  const [menu, loadar, refetch] = useMenu();
   const handleDeleteMenu = async (item) => {
     //   const res = await axiosSecure.delete(`/menu/${id}`);
     Swal.fire({
@@ -23,17 +25,18 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axiosSecure.delete(`/menu/${item._id}`)
+        await axiosSecure
+          .delete(`/menu/${item._id}`)
 
           .then((res) => {
-                   if (res.data.deletedCount > 0) {
-                refetch();
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "Your file has been deleted.",
-                  icon: "success",
-                });
-                console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Item has been deleted.",
+                icon: "success",
+              });
+              console.log(res.data);
             }
           });
       }
@@ -51,7 +54,9 @@ const ManageItems = () => {
 
       {/* table all menu item */}
       <div className="mt-6 mx-8">
-          <div className="my-3 text-base font-bold">Total items : {menu?.length}</div>
+        <div className="my-3 text-base font-bold">
+          Total items : {menu?.length}
+        </div>
         <div className="overflow-x-auto">
           <table className="table table-sm h-[300px] table-pin-rows table-pin-cols">
             <thead className="bg-[#d1a054] py-4  text-base font-semibold">
@@ -80,7 +85,15 @@ const ManageItems = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>Update</td>
+                  <td>
+                    <NavLink to={`/dashboard/updateitem/${item._id}`}>
+                      <button
+                        className="btn hover:text-[#131313] btn-ghost btn-xs bg-red-600 px-2 py-1 text-[#ffffff]"
+                      >
+                       <BiEdit></BiEdit>
+                      </button>
+                    </NavLink>
+                  </td>
                   <td>
                     {" "}
                     <p className="">

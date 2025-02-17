@@ -1,6 +1,4 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter, data } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/HomePage/Home";
 import Menu from "../Pages/Menu/Menu";
@@ -18,94 +16,129 @@ import ManageItems from "../Pages/Dashboard/Dashboard Pages/Admin Page/ManageIte
 import Additems from "../Pages/Dashboard/Dashboard Pages/Admin Page/Additems";
 import AdminHome from "../Pages/Dashboard/Dashboard Pages/Admin Page/AdminHome";
 import AdminRoutes from "./AdminRoutes";
-
+import Update from "../Pages/Dashboard/Dashboard Pages/Admin Page/Update";
+import Payment from "../Pages/Dashboard/Dashboard Pages/User Page/Payment";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children:[
-        {
-         path:"/",
-         element:<Home></Home>
-        },
-        {
-         path:"/contact",
-         element:<Contact></Contact>
-        },
-        {
-         path:"/menu",
-         element:<Menu></Menu>
-        },
-        {
-         path:"/shop",
-         element:<Shop></Shop>
-        },
-        {
-         path:"/login",
-         element:<Login></Login>
-        },
-        {
-         path:"/register",
-         element:<Register></Register>
-        },
-        {
-         path:"/private",
-         element:<PrivateRoute><></></PrivateRoute>
-        }
-      ]
-    },
-    {
-      path: "/dashboard",
-      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-      children:[
-        // user routes
-        {
-         path:"cart",
-         element:<Cart></Cart>
-        },
-        {
-         path:"home",
-         element:<p>home</p>
-        },
-        {
-         path:"reservation",
-         element:<p>reservation</p>
-        },
-        {
-         path:"payment",
-         element:<p>Payment</p>
-        },
-        {
-         path:"addreview",
-         element:<p>add review</p>
-        },
-        {
-         path:"booking",
-         element:<p>my booking</p>
-        },
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/menu",
+        element: <Menu></Menu>,
+      },
+      {
+        path: "/shop",
+        element: <Shop></Shop>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/private",
+        element: (
+          <PrivateRoute>
+            <></>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      // user routes
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "home",
+        element: <p>home</p>,
+      },
+      {
+        path: "reservation",
+        element: <p>reservation</p>,
+      },
+      {
+        path: "cart/payment",
+        element: <Payment></Payment>
+      },
+      {
+        path: "addreview",
+        element: <p>add review</p>,
+      },
+      {
+        path: "booking",
+        element: <p>my booking</p>,
+      },
 
-        // admin routes
-        {
-         path:"allusers",
-         element:<AdminRoutes><Allusers></Allusers></AdminRoutes>
-        },
-        {
-         path:"manageBookings",
-         element:<AdminRoutes><ManageBookings></ManageBookings></AdminRoutes>
-        },
-        {
-         path:"manageItems",
-         element:<AdminRoutes><ManageItems></ManageItems></AdminRoutes>
-        },
-        {
-         path:"addItems",
-         element:<AdminRoutes><Additems></Additems></AdminRoutes>
-        },
-        {
-         path:"adminhome",
-         element:<AdminRoutes><AdminHome></AdminHome></AdminRoutes>
-        },
-      ]
-    },
-  ]);
+      // admin routes
+      {
+        path: "allusers",
+        element: (
+          <AdminRoutes>
+            <Allusers></Allusers>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageBookings",
+        element: (
+          <AdminRoutes>
+            <ManageBookings></ManageBookings>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoutes>
+            <ManageItems></ManageItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "addItems",
+        element: (
+          <AdminRoutes>
+            <Additems></Additems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "updateitem/:id",
+        element: <Update></Update>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+      },
+      {
+        path: "adminhome",
+        element: (
+          <AdminRoutes>
+            <AdminHome></AdminHome>
+          </AdminRoutes>
+        ),
+      },
+    ],
+  },
+]);

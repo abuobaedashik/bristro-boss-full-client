@@ -98,8 +98,8 @@ const Allusers = () => {
         <div className="overflow-x-auto">
           <table className="table table-pin-rows table-pin-cols">
             {/* head */}
-            <thead className="bg-orange-600 rounded-xl text-[#ffffff] text-base font-semibold">
-              <tr>
+            <thead className=" rounded-xl text-base font-semibold">
+              <tr className="bg-orange-600 ">
                 <th></th>
                 <th>NAME</th>
                 <th>EMAIL</th>
