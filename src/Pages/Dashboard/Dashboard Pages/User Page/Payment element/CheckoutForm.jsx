@@ -31,7 +31,7 @@ const CheckoutForm = () => {
     })
 
     if (error) {
-        console.log("[error]",error)
+        console.log("[error message is] ",error)
     }
     else {
         console.log("[PaymentMethod]",paymentMethod)
