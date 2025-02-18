@@ -157,7 +157,7 @@ const Dashboard = () => {
                     ? "px-3 text-base text-[#ffffff] font-medium flex gap-1 items-center"
                     : "flex gap-1 items-center text-sm font-medium px-3"
                 }
-                to={"payment"}
+                to={"paymenthistory"}
               >
                 <MdPayment />
                 Payment History
