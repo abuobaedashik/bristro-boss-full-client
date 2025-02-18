@@ -11,7 +11,7 @@ import icon from '../../assets/icon/icons8-feedback-64.png'
 const Testimonials = () => {
   const [review, setreview] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://bristro-boss-server-eosin.vercel.app/review")
       .then((res) => res.json())
       .then((data) => setreview(data));
   }, []);

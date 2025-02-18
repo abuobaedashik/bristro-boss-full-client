@@ -134,7 +134,7 @@ export const router = createBrowserRouter([
         path: "updateitem/:id",
         element: <Update></Update>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://bristro-boss-server-eosin.vercel.app/menu/${params.id}`),
       },
       {
         path: "adminhome",
